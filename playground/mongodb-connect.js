@@ -21,16 +21,14 @@ MongoClient.connect("mongodb://localhost:27017/TodoApp",(err,db) =>
 
     db.collection("Users").insertOne(
         {
-            name:"Soumyadeep Jana",
+            name:"Soumyadeep Mazumder",
             age:19,
-            location:"Murshidabad"
-        },(err,result) => 
-    {
-        if(err)
-           return console.log(`Unable to insert record ${err}`);
-
-        console.log(result.ops[0]._id.getTimestamp());
-    });
-
+            location:"Kolkata"
+        }).then((result) =>
+        {
+            console.log(result);
+            
+        }); 
+   
     db.close();
 });

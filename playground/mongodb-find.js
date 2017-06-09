@@ -10,8 +10,8 @@ MongoClient.connect("mongodb://localhost:27017/TodoApp", (err,db) =>
     db.collection("Todo").find().toArray().then((docs) => 
     {
         console.log("Todos");
-        docs.forEach((data)=> {console.log(data)},(err)=>{console.log("Error")})
-       // console.log(docs);
+       // docs.forEach((data)=> {console.log(data)},(err)=>{console.log("Error")})
+        console.log(docs);
     },(err) => 
     {
         console.log(`Unable to fetch data from database ${err}`);
