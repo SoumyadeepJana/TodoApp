@@ -6,6 +6,7 @@ const mongoose = require("./db/mongoose.js")
 const {Todo} = require("./models/todo.js");
 const {User} = require("./models/user");
 const {ObjectID} = require("mongodb");
+const {authenticate} = require("./middleware/authenticate");
 
 
 
@@ -18,10 +19,8 @@ app.use(bodyParser.json());
 app.post("/todos",(req,res) => 
 {
     
-    var newTodo = new Todo(
-        {
-            text:req.body.text
-        });
+    var body = _.pick(req.body,["text"]);
+    var newTodo = new Todo(body);
 
     newTodo.save().then((doc) => 
 {
@@ -123,6 +122,13 @@ app.post('/users', (req, res) => {
       res.status(400).send();  
   });
 
+});
+
+
+
+app.get("/users/me",authenticate,(req,res) => 
+{
+    res.send(req.user);
 });
 
 
